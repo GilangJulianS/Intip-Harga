@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home"/>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Profile"/>
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:title="Message"/>
+        <item
+            android:id="@+id/nav_friends"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="Friends"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_build_black_24dp"
+            android:title="Settings"/>
+        <item
+            android:id="@+id/nav_promo"
+            android:icon="@drawable/ic_local_grocery_store_black_24dp"
+            android:title="Promo"/>
+        <item
+            android:id="@+id/nav_collections"
+            android:icon="@drawable/ic_place_black_24dp"
+            android:title="My Collections"/>
+        <item
+            android:id="@+id/nav_add_bussiness"
+            android:icon="@drawable/ic_add_black_24dp"
+            android:title="Add Bussiness"/>
+        <item
+            android:id="@+id/nav_your_bussiness"
+            android:icon="@drawable/ic_location_city_black_24dp"
+            android:title="Your Bussiness"/>
+        <item
+            android:id="@+id/nav_report_bug"
+            android:icon="@drawable/ic_bug_report_black_24dp"
+            android:title="Report Bug"/>
+        <item
+            android:id="@+id/nav_terms_conditions"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="Terms &amp; Conditions"/>
+        <item
+            android:id="@+id/nav_how_it_works"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:title="How It Works"/>
+        <item
+            android:id="@+id/nav_faq"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="FAQ"/>
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>
