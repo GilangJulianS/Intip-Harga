@@ -38,6 +38,11 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
         fragments.remove(idx);
     }
 
+    public void reset(){
+        datas.clear();
+        fragments.clear();
+    }
+
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);
@@ -47,4 +52,6 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragments.size();
     }
+
+
 }

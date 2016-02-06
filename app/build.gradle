@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1@aar'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

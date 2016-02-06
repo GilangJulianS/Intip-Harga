@@ -1,32 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff0000">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="wrap_content">
 
-        <com.viewpagerindicator.CirclePageIndicator
-            android:id="@+id/page_indicator"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/page_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignBottom="@id/view_pager"
+                android:layout_marginBottom="15dp"
+                app:fillColor="#DDCF5B"
+                app:pageColor="#B6B6B4"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignBottom="@id/view_pager"
-            android:layout_marginBottom="15dp"
-            app:fillColor="#DDCF5B"
-            app:pageColor="#B6B6B4"/>
+            android:orientation="vertical"
+            android:background="#F4E787">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Quick Search"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_quick_search_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:drawablePadding="-17dp"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/restaurant"
+                    android:elevation="5dp"
+                    android:text="Restaurant &amp; Cafe"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/btn_orange"/>
+
+                <Button
+                    android:id="@+id/btn_quick_search_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:paddingBottom="15dp"
+                    android:elevation="5dp"
+                    android:drawableTop="@drawable/salon"
+                    android:drawablePadding="-17dp"
+                    android:text="Salon &amp; Spa"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:background="@drawable/btn_orange"/>
+
+                <Button
+                    android:id="@+id/btn_quick_search_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:drawableTop="@drawable/klinik"
+                    android:paddingBottom="15dp"
+                    android:text="Klinik"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:drawablePadding="-17dp"
+                    android:background="@drawable/btn_orange"/>
+
+                <Button
+                    android:id="@+id/btn_quick_search_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:paddingBottom="15dp"
+                    android:drawableTop="@drawable/lainnya"
+                    android:text="Restaurant &amp; cafe"
+                    android:textSize="10sp"
+                    android:textAllCaps="false"
+                    android:drawablePadding="-17dp"
+                    android:background="@drawable/btn_orange"/>
 
 
-</LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/make_new"
+                android:scaleType="centerCrop"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_add_white_24dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Make New Collections"
+                android:textColor="#fff"
+                android:background="@drawable/btn_transparent_border"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F4E787"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Browse Collection"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4E787"
+                android:layout_marginTop="10dp">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

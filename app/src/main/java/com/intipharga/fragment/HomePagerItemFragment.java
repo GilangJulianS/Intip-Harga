@@ -31,6 +31,7 @@ public class HomePagerItemFragment extends Fragment {
         HomePagerItemFragment fragment = new HomePagerItemFragment();
         fragment.activity = activity;
         fragment.item = item;
+        fragment.setRetainInstance(true);
         return fragment;
     }
 
