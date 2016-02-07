@@ -1,8 +1,10 @@
 package com.intipharga.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import com.gilang.recyclerviewframework.DataModel;
 import com.gilang.recyclerviewframework.RecyclerAdapter;
+import com.intipharga.activity.MainActivity;
 import com.intipharga.activity.R;
 import com.intipharga.custom.HomePagerAdapter;
 import com.intipharga.model.CollectionItem;
@@ -35,6 +38,7 @@ public class HomeFragment extends Fragment {
     private HomePagerAdapter pagerAdapter;
     private CirclePageIndicator indicator;
     private Button btnQuickSearch1, btnQuickSearch2, btnQuickSearch3, btnQuickSearch4;
+    private Button btnBrowseAll;
     private ViewGroup collectionsContainer;
     private List<CollectionItem> collections;
 
@@ -65,11 +69,21 @@ public class HomeFragment extends Fragment {
         btnQuickSearch3 = (Button) v.findViewById(R.id.btn_quick_search_3);
         btnQuickSearch4 = (Button) v.findViewById(R.id.btn_quick_search_4);
         collectionsContainer = (ViewGroup) v.findViewById(R.id.collections_container);
+        btnBrowseAll = (Button) v.findViewById(R.id.btn_browse_all);
     }
 
     public void setupView(View v){
         setupViewPager();
         setupCollections();
+
+        btnBrowseAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, MainActivity.class);
+                intent.putExtra(MainActivity.KEY_FRAGMENT, MainActivity.FRAGMENT_MY_COLLECTION);
+                activity.startActivity(intent);
+            }
+        });
     }
 
     public void setupViewPager(){
@@ -106,6 +120,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void addDummyCollections(){
+        collections.clear();
         collections.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12));
         collections.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1));
         collections.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5));
