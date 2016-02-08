@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.gilang.recyclerviewframework.DataModel;
 import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.gilang.recyclerviewframework.RecyclerHolder;
+import com.intipharga.activity.MainActivity;
 import com.intipharga.activity.R;
 import com.intipharga.model.Place;
 
@@ -36,7 +37,7 @@ public class PlaceHolder extends RecyclerHolder{
     }
 
     @Override
-    public void bind(DataModel dataModel, Activity activity, int position) {
+    public void bind(DataModel dataModel, final Activity activity, int position) {
         Place p = (Place) dataModel;
         img.setImageResource(p.imgRes);
         txtName.setText(p.txtName);
@@ -47,7 +48,7 @@ public class PlaceHolder extends RecyclerHolder{
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                activity.startActivity(MainActivity.newIntent(activity, null, MainActivity.FRAGMENT_PLACE));
             }
         });
     }

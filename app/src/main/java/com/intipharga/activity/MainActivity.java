@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.intipharga.fragment.HomeFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
+import com.intipharga.fragment.PlaceFragment;
 import com.intipharga.fragment.PlaceListFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_HOME = 100;
     public static final int FRAGMENT_MY_COLLECTION = 101;
     public static final int FRAGMENT_PLACE_LIST = 102;
+    public static final int FRAGMENT_PLACE = 103;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, MyCollectionsFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_PLACE_LIST){
                 manager.beginTransaction().replace(R.id.container, PlaceListFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_PLACE){
+                manager.beginTransaction().replace(R.id.container, PlaceFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
