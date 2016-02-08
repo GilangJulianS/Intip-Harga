@@ -1,7 +1,11 @@
 package com.intipharga.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,21 +18,26 @@ import android.view.MenuItem;
 
 import com.intipharga.fragment.HomeFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
+import com.intipharga.fragment.PlaceListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String KEY_PARENT = "isParentView";
     public static final String KEY_FRAGMENT = "fragmentType";
+    public static final String KEY_TITLE = "title";
     public static final int FRAGMENT_HOME = 100;
     public static final int FRAGMENT_MY_COLLECTION = 101;
+    public static final int FRAGMENT_PLACE_LIST = 102;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,13 +53,20 @@ public class MainActivity extends AppCompatActivity
         if(extras != null){
             isParentView = extras.getBoolean(KEY_PARENT, false);
             int fragmentType = extras.getInt(KEY_FRAGMENT, FRAGMENT_HOME);
+            title = extras.getString(KEY_TITLE, "Intip Harga");
+
+            getSupportActionBar().setTitle(title);
+
             FragmentManager manager = getSupportFragmentManager();
             if(fragmentType == FRAGMENT_HOME){
                 manager.beginTransaction().replace(R.id.container, HomeFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_MY_COLLECTION){
                 manager.beginTransaction().replace(R.id.container, MyCollectionsFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_PLACE_LIST){
+                manager.beginTransaction().replace(R.id.container, PlaceListFragment.newInstance(this)).commit();
             }
         }else {
+            getSupportActionBar().setTitle("Intip Harga");
             isParentView = true;
             getSupportFragmentManager().beginTransaction().replace(R.id.container, HomeFragment.newInstance(this)).commit();
         }
@@ -131,5 +147,15 @@ public class MainActivity extends AppCompatActivity
         }
 
         return true;
+    }
+
+    public static Intent newIntent(Context context, @Nullable String title, int fragmentType){
+        Intent intent = new Intent(context, MainActivity.class);
+        if(title != null){
+            intent.putExtra(KEY_TITLE, title);
+            System.out.println(title);
+        }
+        intent.putExtra(KEY_FRAGMENT, fragmentType);
+        return intent;
     }
 }

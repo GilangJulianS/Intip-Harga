@@ -76,12 +76,38 @@ public class HomeFragment extends Fragment {
         setupViewPager();
         setupCollections();
 
+        btnQuickSearch1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(MainActivity.newIntent(activity, "Restaurants", MainActivity.FRAGMENT_PLACE_LIST));
+            }
+        });
+
+        btnQuickSearch2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(MainActivity.newIntent(activity, "Salon & Spa", MainActivity.FRAGMENT_PLACE_LIST));
+            }
+        });
+
+        btnQuickSearch3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(MainActivity.newIntent(activity, "Klinik", MainActivity.FRAGMENT_PLACE_LIST));
+            }
+        });
+
+        btnQuickSearch4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.startActivity(MainActivity.newIntent(activity, "Lainnya", MainActivity.FRAGMENT_PLACE_LIST));
+            }
+        });
+
         btnBrowseAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, MainActivity.class);
-                intent.putExtra(MainActivity.KEY_FRAGMENT, MainActivity.FRAGMENT_MY_COLLECTION);
-                activity.startActivity(intent);
+                activity.startActivity(MainActivity.newIntent(activity, "My Collections", MainActivity.FRAGMENT_MY_COLLECTION));
             }
         });
     }
@@ -100,14 +126,24 @@ public class HomeFragment extends Fragment {
         addDummyCollections();
         LayoutInflater inflater = activity.getLayoutInflater();
         for(CollectionItem item : collections){
+            final CollectionItem temp = item;
             View v = inflater.inflate(R.layout.card_collection_item, collectionsContainer, false);
             ImageView img = (ImageView) v.findViewById(R.id.img);
             TextView txtPrimary = (TextView) v.findViewById(R.id.txt_primary);
             TextView txtSecondary = (TextView) v.findViewById(R.id.txt_secondary);
+            ViewGroup card = (ViewGroup) v.findViewById(R.id.card_view);
 
             img.setImageResource(item.imgRes);
             txtPrimary.setText(item.txtPrimary);
             txtSecondary.setText(item.jumlah + " Tempat");
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.startActivity(MainActivity.newIntent(activity, temp.txtPrimary, MainActivity.FRAGMENT_PLACE_LIST));
+                }
+            });
+
             collectionsContainer.addView(v);
         }
     }

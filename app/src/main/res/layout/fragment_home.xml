@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#F4E787">
+            android:background="#FFF59D">
 
             <TextView
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                     android:layout_margin="5dp"
                     android:paddingBottom="15dp"
                     android:drawableTop="@drawable/lainnya"
-                    android:text="Restaurant &amp; cafe"
+                    android:text="Lainnya"
                     android:textSize="10sp"
                     android:textAllCaps="false"
                     android:drawablePadding="-17dp"
@@ -140,7 +140,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F4E787"
+            android:background="#FFF59D"
             android:orientation="vertical">
 
             <TextView
