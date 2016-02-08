@@ -42,19 +42,24 @@ public class PlaceFragment extends Fragment {
     }
 
     public void bindViews(View v){
-        viewPager = (ViewPager) v.findViewById(R.id.view_pager);
         pagertab = (PagerSlidingTabStrip) v.findViewById(R.id.pagertab);
+        viewPager = (ViewPager) v.findViewById(R.id.view_pager);
     }
 
     public void setupViews(){
+
         adapter = new PlacePagerAdapter(activity);
 
         viewPager.setAdapter(adapter);
 
         pagertab.setShouldExpand(true);
-        pagertab.setIndicatorColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+//        pagertab.setIndicatorColor(ContextCompat.getColor(activity, R.color.colorPrimary));
 
         pagertab.setViewPager(viewPager);
+
+    }
+
+    public void setupViewPager(){
 
     }
 }

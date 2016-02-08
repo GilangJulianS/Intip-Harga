@@ -50,10 +50,12 @@ public class MainActivity extends AppCompatActivity
         Bundle extras = null;
         if(caller != null) {
             extras = caller.getExtras();
+        }else{
             isParentView = true;
         }
         if(extras != null){
-            isParentView = extras.getBoolean(KEY_PARENT, false);
+
+            isParentView = extras.getBoolean(KEY_PARENT, true);
             int fragmentType = extras.getInt(KEY_FRAGMENT, FRAGMENT_HOME);
             title = extras.getString(KEY_TITLE, "Intip Harga");
 
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
         }
-
+        finish();
         return true;
     }
 
@@ -159,6 +161,7 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(KEY_TITLE, title);
             System.out.println(title);
         }
+        intent.putExtra(KEY_PARENT, false);
         intent.putExtra(KEY_FRAGMENT, fragmentType);
         return intent;
     }

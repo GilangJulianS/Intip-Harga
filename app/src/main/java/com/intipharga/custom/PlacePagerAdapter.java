@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 
 import com.intipharga.fragment.HomePagerItemFragment;
+import com.intipharga.fragment.InformationFragment;
 import com.intipharga.fragment.MenuFragment;
 import com.intipharga.model.HomePagerItem;
 
@@ -18,7 +19,7 @@ public class PlacePagerAdapter extends FragmentPagerAdapter {
 
     private AppCompatActivity activity;
     private MenuFragment menuFragment;
-    private MenuFragment fragment2;
+    private InformationFragment informationFragment;
 
     public PlacePagerAdapter(AppCompatActivity activity){
         super(activity.getSupportFragmentManager());
@@ -28,7 +29,7 @@ public class PlacePagerAdapter extends FragmentPagerAdapter {
 
     public void init(){
         menuFragment = MenuFragment.newInstance(activity);
-        fragment2 = MenuFragment.newInstance(activity);
+        informationFragment = InformationFragment.newInstance(activity);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class PlacePagerAdapter extends FragmentPagerAdapter {
         if(position == 0){
             return menuFragment;
         }else if(position == 1){
-            return fragment2;
+            return informationFragment;
         }
         return null;
     }
