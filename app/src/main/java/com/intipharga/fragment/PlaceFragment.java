@@ -53,7 +53,8 @@ public class PlaceFragment extends Fragment {
         viewPager.setAdapter(adapter);
 
         pagertab.setShouldExpand(true);
-//        pagertab.setIndicatorColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        pagertab.setIndicatorColor(ContextCompat.getColor(activity, R.color.background_container));
+        pagertab.setUnderlineHeight(0);
 
         pagertab.setViewPager(viewPager);
 

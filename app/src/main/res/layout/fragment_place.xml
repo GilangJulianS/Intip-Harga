@@ -3,6 +3,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -17,7 +18,9 @@
         <com.astuetz.PagerSlidingTabStrip
             android:id="@+id/pagertab"
             android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp"
+            app:pstsIndicatorHeight="30dp"
+            android:background="@color/background_container_dark"/>
 
         <com.intipharga.custom.CustomViewPager
             android:id="@+id/view_pager"

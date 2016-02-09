@@ -7,4 +7,6 @@
     <!--<color name="colorAccent">#FF4081</color>-->
     <color name="colorAccent">#FFEB3B</color>
     <color name="background_container">#FFF59D</color>
+    <color name="background_container_dark">#A09953</color>
+
 </resources>
