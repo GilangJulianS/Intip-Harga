@@ -48,7 +48,7 @@ public class PlaceFragment extends Fragment {
 
     public void setupViews(){
 
-        adapter = new PlacePagerAdapter(activity);
+        adapter = new PlacePagerAdapter(activity, viewPager);
 
         viewPager.setAdapter(adapter);
 
