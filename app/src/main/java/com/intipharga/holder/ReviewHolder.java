@@ -40,6 +40,8 @@ public class ReviewHolder extends RecyclerHolder {
         txtReview.setText(r.review);
         if(!r.isMVP){
             txtMVP.setVisibility(View.GONE);
+        }else{
+            txtMVP.setVisibility(View.VISIBLE);
         }
         ratingBar.setRating(r.rating);
     }

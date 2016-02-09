@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     public static final String KEY_PARENT = "isParentView";
     public static final String KEY_FRAGMENT = "fragmentType";
     public static final String KEY_TITLE = "title";
+    public static final String KEY_MENU_ID = "menuId";
     public static final int FRAGMENT_HOME = 100;
     public static final int FRAGMENT_MY_COLLECTION = 101;
     public static final int FRAGMENT_PLACE_LIST = 102;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
+    private int menuId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +60,10 @@ public class MainActivity extends AppCompatActivity
             isParentView = extras.getBoolean(KEY_PARENT, true);
             int fragmentType = extras.getInt(KEY_FRAGMENT, FRAGMENT_HOME);
             title = extras.getString(KEY_TITLE, "Intip Harga");
+            menuId = extras.getInt(KEY_MENU_ID, 0);
 
             getSupportActionBar().setTitle(title);
+            navigationView.getMenu().getItem(menuId).setChecked(true);
 
             FragmentManager manager = getSupportFragmentManager();
             if(fragmentType == FRAGMENT_HOME){
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setTitle("Intip Harga");
             isParentView = true;
             getSupportFragmentManager().beginTransaction().replace(R.id.container, HomeFragment.newInstance(this)).commit();
+            navigationView.getMenu().getItem(menuId).setChecked(true);
         }
 
         if(isParentView){
@@ -148,6 +153,7 @@ public class MainActivity extends AppCompatActivity
         switch (id){
             case R.id.nav_home:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_HOME);
+                intent.putExtra(KEY_MENU_ID, 0);
                 startActivity(intent);
                 break;
         }
