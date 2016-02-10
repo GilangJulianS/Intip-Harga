@@ -23,6 +23,7 @@ import com.intipharga.fragment.PlaceFragment;
 import com.intipharga.fragment.PlaceListFragment;
 import com.intipharga.fragment.ProfileFragment;
 import com.intipharga.fragment.SettingsFragment;
+import com.intipharga.fragment.TermConditionFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_PROFILE = 104;
     public static final int FRAGMENT_SETTINGS = 105;
     public static final int FRAGMENT_BUG_REPORT = 106;
+    public static final int FRAGMENT_TERM_CONDITION = 107;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity
                 getFragmentManager().beginTransaction().replace(R.id.container, SettingsFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_BUG_REPORT){
                 manager.beginTransaction().replace(R.id.container, BugReportFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_TERM_CONDITION){
+                manager.beginTransaction().replace(R.id.container, TermConditionFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -190,6 +194,11 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_BUG_REPORT);
                 intent.putExtra(KEY_MENU_ID, 9);
                 intent.putExtra(KEY_TITLE, "Report Bug");
+                startActivity(intent);
+                break;
+            case R.id.nav_terms_conditions:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_TERM_CONDITION);
+                intent.putExtra(KEY_MENU_ID, 10);
                 startActivity(intent);
                 break;
         }
