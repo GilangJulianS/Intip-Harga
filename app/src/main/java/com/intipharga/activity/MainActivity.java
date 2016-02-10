@@ -21,6 +21,7 @@ import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
 import com.intipharga.fragment.PlaceListFragment;
 import com.intipharga.fragment.ProfileFragment;
+import com.intipharga.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_PLACE_LIST = 102;
     public static final int FRAGMENT_PLACE = 103;
     public static final int FRAGMENT_PROFILE = 104;
+    public static final int FRAGMENT_SETTINGS = 105;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, PlaceFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_PROFILE){
                 manager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_SETTINGS){
+                getFragmentManager().beginTransaction().replace(R.id.container, SettingsFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -164,6 +168,12 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_PROFILE);
                 intent.putExtra(KEY_MENU_ID, 1);
                 intent.putExtra(KEY_TITLE, "My Profile");
+                startActivity(intent);
+                break;
+            case R.id.nav_settings:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_SETTINGS);
+                intent.putExtra(KEY_MENU_ID, 4);
+                intent.putExtra(KEY_TITLE, "Settings");
                 startActivity(intent);
                 break;
         }
