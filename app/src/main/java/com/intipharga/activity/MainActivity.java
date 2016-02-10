@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.intipharga.fragment.BugReportFragment;
 import com.intipharga.fragment.HomeFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_PLACE = 103;
     public static final int FRAGMENT_PROFILE = 104;
     public static final int FRAGMENT_SETTINGS = 105;
+    public static final int FRAGMENT_BUG_REPORT = 106;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_SETTINGS){
                 getFragmentManager().beginTransaction().replace(R.id.container, SettingsFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_BUG_REPORT){
+                manager.beginTransaction().replace(R.id.container, BugReportFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -174,6 +178,18 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_SETTINGS);
                 intent.putExtra(KEY_MENU_ID, 4);
                 intent.putExtra(KEY_TITLE, "Settings");
+                startActivity(intent);
+                break;
+            case R.id.nav_collections:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_MY_COLLECTION);
+                intent.putExtra(KEY_MENU_ID, 6);
+                intent.putExtra(KEY_TITLE, "My Collections");
+                startActivity(intent);
+                break;
+            case R.id.nav_report_bug:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_BUG_REPORT);
+                intent.putExtra(KEY_MENU_ID, 9);
+                intent.putExtra(KEY_TITLE, "Report Bug");
                 startActivity(intent);
                 break;
         }
