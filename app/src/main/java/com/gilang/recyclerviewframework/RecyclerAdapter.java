@@ -16,10 +16,12 @@ public class RecyclerAdapter extends Adapter<RecyclerHolder>{
 
     public List<DataModel> datas;
     private Activity activity;
+    private int showLimit;
 
     public RecyclerAdapter(Activity activity){
         datas = new ArrayList<>();
         this.activity = activity;
+        showLimit = -1;
     }
 
     public void add(DataModel dataModel){
@@ -47,12 +49,21 @@ public class RecyclerAdapter extends Adapter<RecyclerHolder>{
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        if(showLimit < 0){
+            return datas.size();
+        }else{
+            return showLimit;
+        }
     }
 
     @Override
     public int getItemViewType(int position){
         return datas.get(position).getViewResId();
+    }
+
+    public void setShowLimit(int limit){
+        showLimit = limit;
+        notifyDataSetChanged();
     }
 
     public int searchViewTypePosition(int viewType){
