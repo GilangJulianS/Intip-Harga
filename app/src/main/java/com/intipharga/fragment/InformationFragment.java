@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.intipharga.activity.R;
@@ -27,8 +29,10 @@ public class InformationFragment extends Fragment {
     private RecyclerAdapter photosAdapter, reviewAdapter;
     private RecyclerView.LayoutManager photosManager, reviewManager;
     private ImageButton btnToggleDetail;
-    private ViewGroup containerInformation;
+    private ViewGroup containerInformation, groupToggleReview;
     private OnStateChangeListener callback;
+    private TextView txtMoreReview;
+    private ImageView imgToggleReview;
 
     public InformationFragment(){}
 
@@ -57,6 +61,9 @@ public class InformationFragment extends Fragment {
         reviewRecycler = (RecyclerView) v.findViewById(R.id.recycler_reviews);
         btnToggleDetail = (ImageButton) v.findViewById(R.id.btn_toggle_detail);
         containerInformation = (ViewGroup) v.findViewById(R.id.container_information);
+        groupToggleReview = (ViewGroup) v.findViewById(R.id.group_toggle_review);
+        txtMoreReview = (TextView) v.findViewById(R.id.txt_more_reviews);
+        imgToggleReview = (ImageView) v.findViewById(R.id.btn_toggle_reviews);
     }
 
     public void setupViews(){
@@ -78,17 +85,39 @@ public class InformationFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if(callback != null) {
+                if (callback != null) {
                     callback.onStateChange();
                 }
-                if(!isExpanded){
+                if (!isExpanded) {
                     containerInformation.setVisibility(View.VISIBLE);
                     btnToggleDetail.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
                     isExpanded = true;
-                }else{
+                } else {
                     containerInformation.setVisibility(View.GONE);
                     btnToggleDetail.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
                     isExpanded = false;
+                }
+            }
+        });
+
+        groupToggleReview.setOnClickListener(new View.OnClickListener() {
+            boolean isExpanded = false;
+
+            @Override
+            public void onClick(View v) {
+                if(isExpanded){
+                    isExpanded = false;
+                    txtMoreReview.setText("More Review");
+                    imgToggleReview.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                    reviewAdapter.setShowLimit(2);
+                }else{
+                    isExpanded = true;
+                    txtMoreReview.setText("Less Review");
+                    imgToggleReview.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                    reviewAdapter.setShowLimit(-1);
+                }
+                if (callback != null) {
+                    callback.onStateChange();
                 }
             }
         });
@@ -111,6 +140,7 @@ public class InformationFragment extends Fragment {
         reviewAdapter.add(new Review(img, "Vriske R.", 3.8f, true, 1450, 254, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
         reviewAdapter.add(new Review(img, "Vriske R.", 2.5f, false, 1450, 254, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
         reviewAdapter.add(new Review(img, "Vriske R.", 1.5f, true, 1450, 254, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
+        reviewAdapter.setShowLimit(2);
     }
 
     public interface OnStateChangeListener{

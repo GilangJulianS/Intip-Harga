@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class PlacePagerAdapter extends FragmentPagerAdapter {
 
+    public static final int TYPE_RESTAURANT = 100;
+    public static final int TYPE_OTHER = 101;
     private AppCompatActivity activity;
     private MenuFragment menuFragment;
     private InformationFragment informationFragment;
@@ -32,12 +34,13 @@ public class PlacePagerAdapter extends FragmentPagerAdapter {
     }
 
     public void init(){
-        menuFragment = MenuFragment.newInstance(activity);
+        if(getType() == TYPE_RESTAURANT)
+            menuFragment = MenuFragment.newInstance(activity);
         informationFragment = InformationFragment.newInstance(activity);
         informationFragment.setOnStateChangeListener(new InformationFragment.OnStateChangeListener() {
             @Override
             public void onStateChange() {
-                if(pager instanceof CustomViewPager) {
+                if (pager instanceof CustomViewPager) {
                     Runnable r = new Runnable() {
                         @Override
                         public void run() {
@@ -54,19 +57,25 @@ public class PlacePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if(position == 0){
-            return "Menu";
-        }else if(position == 1){
-            return "Information";
+        if(getType() == TYPE_RESTAURANT) {
+            if (position == 0) {
+                return "Menu";
+            } else if (position == 1) {
+                return "Information";
+            }
         }
         return "";
     }
 
     @Override
     public Fragment getItem(int position) {
-        if(position == 0){
-            return menuFragment;
-        }else if(position == 1){
+        if(getType() == TYPE_RESTAURANT) {
+            if (position == 0) {
+                return menuFragment;
+            } else if (position == 1) {
+                return informationFragment;
+            }
+        }else if(getType() == TYPE_OTHER){
             return informationFragment;
         }
         return null;
@@ -74,6 +83,15 @@ public class PlacePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        if(getType() == TYPE_RESTAURANT)
+            return 2;
+        else
+            return 1;
+    }
+
+    public int getType(){
+        // return TYPE_OTHER buat ngilangin tab
+        // return TYPE_RESTAURANT buat munculin tab
+        return TYPE_RESTAURANT;
     }
 }

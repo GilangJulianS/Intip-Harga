@@ -18,6 +18,8 @@ import com.intipharga.custom.PlacePagerAdapter;
  */
 public class PlaceFragment extends Fragment {
 
+    public static final int TYPE_RESTAURANT = 100;
+    public static final int TYPE_OTHER = 101;
     private AppCompatActivity activity;
     private PlacePagerAdapter adapter;
     private ViewPager viewPager;
@@ -37,6 +39,9 @@ public class PlaceFragment extends Fragment {
 
         bindViews(v);
         setupViews();
+
+        if(getType() == TYPE_OTHER)
+            hideTab();
 
         return v;
     }
@@ -60,7 +65,18 @@ public class PlaceFragment extends Fragment {
 
     }
 
+    public void hideTab(){
+        pagertab.setVisibility(View.GONE);
+    }
+
     public void setupViewPager(){
 
     }
+
+    public int getType(){
+        // return TYPE_OTHER buat ngilangin tab
+        // return TYPE_RESTAURANT buat munculin tab
+        return TYPE_RESTAURANT;
+    }
+
 }
