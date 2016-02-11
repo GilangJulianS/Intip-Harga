@@ -1,6 +1,11 @@
 package com.intipharga.holder;
 
 import android.app.Activity;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -41,7 +46,16 @@ public class PlaceHolder extends RecyclerHolder{
         Place p = (Place) dataModel;
         img.setImageResource(p.imgRes);
         txtName.setText(p.txtName);
+
         ratingBar.setRating(p.rating);
+//        Drawable ratingDrawable = ratingBar.getProgressDrawable();
+//        DrawableCompat.setTint(ratingDrawable, ContextCompat.getColor(activity, R.color.colorPrimary));
+//        ratingBar.setProgressDrawable(ratingDrawable);
+        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        stars.getDrawable(0).setColorFilter(ContextCompat.getColor(activity, android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(1).setColorFilter(ContextCompat.getColor(activity, android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
+
         txtReviewCounter.setText(p.reviewCounter + " Reviews");
         txtAlamat.setText(p.txtAlamat);
 

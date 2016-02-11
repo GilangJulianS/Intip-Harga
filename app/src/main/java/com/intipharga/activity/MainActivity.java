@@ -224,6 +224,8 @@ public class MainActivity extends AppCompatActivity
         }
         intent.putExtra(KEY_PARENT, false);
         intent.putExtra(KEY_FRAGMENT, fragmentType);
+        if(fragmentType == FRAGMENT_HOME)
+            intent.putExtra(KEY_PARENT, true);
         return intent;
     }
 }
