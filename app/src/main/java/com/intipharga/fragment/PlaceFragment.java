@@ -18,6 +18,8 @@ import com.intipharga.custom.PlacePagerAdapter;
  */
 public class PlaceFragment extends Fragment {
 
+    public static final int TYPE_RESTAURANT = 100;
+    public static final int TYPE_OTHER = 101;
     private AppCompatActivity activity;
     private PlacePagerAdapter adapter;
     private ViewPager viewPager;
@@ -38,23 +40,43 @@ public class PlaceFragment extends Fragment {
         bindViews(v);
         setupViews();
 
+        if(getType() == TYPE_OTHER)
+            hideTab();
+
         return v;
     }
 
     public void bindViews(View v){
-        viewPager = (ViewPager) v.findViewById(R.id.view_pager);
         pagertab = (PagerSlidingTabStrip) v.findViewById(R.id.pagertab);
+        viewPager = (ViewPager) v.findViewById(R.id.view_pager);
     }
 
     public void setupViews(){
-        adapter = new PlacePagerAdapter(activity);
+
+        adapter = new PlacePagerAdapter(activity, viewPager);
 
         viewPager.setAdapter(adapter);
 
         pagertab.setShouldExpand(true);
-        pagertab.setIndicatorColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        pagertab.setIndicatorColor(ContextCompat.getColor(activity, R.color.background_container));
+        pagertab.setUnderlineHeight(0);
 
         pagertab.setViewPager(viewPager);
 
     }
+
+    public void hideTab(){
+        pagertab.setVisibility(View.GONE);
+    }
+
+    public void setupViewPager(){
+
+    }
+
+    public int getType(){
+        // return TYPE_OTHER buat ngilangin tab
+        // return TYPE_RESTAURANT buat munculin tab
+        return TYPE_RESTAURANT;
+    }
+
 }

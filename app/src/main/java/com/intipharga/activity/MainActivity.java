@@ -16,10 +16,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.intipharga.fragment.BugReportFragment;
 import com.intipharga.fragment.HomeFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
 import com.intipharga.fragment.PlaceListFragment;
+import com.intipharga.fragment.ProfileFragment;
+import com.intipharga.fragment.PromoFragment;
+import com.intipharga.fragment.SettingsFragment;
+import com.intipharga.fragment.TermConditionFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,13 +32,20 @@ public class MainActivity extends AppCompatActivity
     public static final String KEY_PARENT = "isParentView";
     public static final String KEY_FRAGMENT = "fragmentType";
     public static final String KEY_TITLE = "title";
+    public static final String KEY_MENU_ID = "menuId";
     public static final int FRAGMENT_HOME = 100;
     public static final int FRAGMENT_MY_COLLECTION = 101;
     public static final int FRAGMENT_PLACE_LIST = 102;
     public static final int FRAGMENT_PLACE = 103;
+    public static final int FRAGMENT_PROFILE = 104;
+    public static final int FRAGMENT_SETTINGS = 105;
+    public static final int FRAGMENT_BUG_REPORT = 106;
+    public static final int FRAGMENT_TERM_CONDITION = 107;
+    public static final int FRAGMENT_PROMO = 108;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
+    private int menuId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +62,18 @@ public class MainActivity extends AppCompatActivity
         Bundle extras = null;
         if(caller != null) {
             extras = caller.getExtras();
+        }else{
             isParentView = true;
         }
         if(extras != null){
-            isParentView = extras.getBoolean(KEY_PARENT, false);
+
+            isParentView = extras.getBoolean(KEY_PARENT, true);
             int fragmentType = extras.getInt(KEY_FRAGMENT, FRAGMENT_HOME);
             title = extras.getString(KEY_TITLE, "Intip Harga");
+            menuId = extras.getInt(KEY_MENU_ID, 0);
 
             getSupportActionBar().setTitle(title);
+            navigationView.getMenu().getItem(menuId).setChecked(true);
 
             FragmentManager manager = getSupportFragmentManager();
             if(fragmentType == FRAGMENT_HOME){
@@ -68,11 +84,22 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, PlaceListFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_PLACE){
                 manager.beginTransaction().replace(R.id.container, PlaceFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_PROFILE){
+                manager.beginTransaction().replace(R.id.container, ProfileFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_SETTINGS){
+                getFragmentManager().beginTransaction().replace(R.id.container, SettingsFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_BUG_REPORT){
+                manager.beginTransaction().replace(R.id.container, BugReportFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_TERM_CONDITION){
+                manager.beginTransaction().replace(R.id.container, TermConditionFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_PROMO){
+                manager.beginTransaction().replace(R.id.container, PromoFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
             isParentView = true;
             getSupportFragmentManager().beginTransaction().replace(R.id.container, HomeFragment.newInstance(this)).commit();
+            navigationView.getMenu().getItem(menuId).setChecked(true);
         }
 
         if(isParentView){
@@ -146,10 +173,46 @@ public class MainActivity extends AppCompatActivity
         switch (id){
             case R.id.nav_home:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_HOME);
+                intent.putExtra(KEY_MENU_ID, 0);
+                startActivity(intent);
+                break;
+            case R.id.nav_profile:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_PROFILE);
+                intent.putExtra(KEY_MENU_ID, 1);
+                intent.putExtra(KEY_TITLE, "My Profile");
+                startActivity(intent);
+                break;
+            case R.id.nav_settings:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_SETTINGS);
+                intent.putExtra(KEY_MENU_ID, 4);
+                intent.putExtra(KEY_TITLE, "Settings");
+                startActivity(intent);
+                break;
+            case R.id.nav_promo:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_PROMO);
+                intent.putExtra(KEY_MENU_ID, 5);
+                intent.putExtra(KEY_TITLE, "Promo");
+                startActivity(intent);
+                break;
+            case R.id.nav_collections:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_MY_COLLECTION);
+                intent.putExtra(KEY_MENU_ID, 6);
+                intent.putExtra(KEY_TITLE, "My Collections");
+                startActivity(intent);
+                break;
+            case R.id.nav_report_bug:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_BUG_REPORT);
+                intent.putExtra(KEY_MENU_ID, 9);
+                intent.putExtra(KEY_TITLE, "Report Bug");
+                startActivity(intent);
+                break;
+            case R.id.nav_terms_conditions:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_TERM_CONDITION);
+                intent.putExtra(KEY_MENU_ID, 10);
                 startActivity(intent);
                 break;
         }
-
+        finish();
         return true;
     }
 
@@ -159,6 +222,7 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(KEY_TITLE, title);
             System.out.println(title);
         }
+        intent.putExtra(KEY_PARENT, false);
         intent.putExtra(KEY_FRAGMENT, fragmentType);
         return intent;
     }
