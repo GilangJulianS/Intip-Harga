@@ -98,7 +98,7 @@ public class PlaceFragment extends Fragment {
                 btnMakeNew.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(activity, "Make New Button Clicked", Toast.LENGTH_SHORT);
+                        Toast.makeText(activity, "Make New Button Clicked", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });

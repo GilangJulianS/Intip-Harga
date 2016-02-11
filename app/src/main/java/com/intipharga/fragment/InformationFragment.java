@@ -29,7 +29,7 @@ public class InformationFragment extends Fragment {
     private RecyclerAdapter photosAdapter, reviewAdapter;
     private RecyclerView.LayoutManager photosManager, reviewManager;
     private ImageButton btnToggleDetail;
-    private ViewGroup containerInformation, groupToggleReview;
+    private ViewGroup containerInformation, groupToggleReview, groupToggleDetail;
     private OnStateChangeListener callback;
     private TextView txtMoreReview;
     private ImageView imgToggleReview;
@@ -62,6 +62,7 @@ public class InformationFragment extends Fragment {
         btnToggleDetail = (ImageButton) v.findViewById(R.id.btn_toggle_detail);
         containerInformation = (ViewGroup) v.findViewById(R.id.container_information);
         groupToggleReview = (ViewGroup) v.findViewById(R.id.group_toggle_review);
+        groupToggleDetail = (ViewGroup) v.findViewById(R.id.group_toggle_detail);
         txtMoreReview = (TextView) v.findViewById(R.id.txt_more_reviews);
         imgToggleReview = (ImageView) v.findViewById(R.id.btn_toggle_reviews);
     }
@@ -80,7 +81,7 @@ public class InformationFragment extends Fragment {
         reviewRecycler.addItemDecoration(new DividerItemDecoration(activity, null));
         reviewRecycler.setAdapter(reviewAdapter);
 
-        btnToggleDetail.setOnClickListener(new View.OnClickListener() {
+        groupToggleDetail.setOnClickListener(new View.OnClickListener() {
             private boolean isExpanded = false;
 
             @Override
