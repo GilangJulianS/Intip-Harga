@@ -22,6 +22,7 @@ import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
 import com.intipharga.fragment.PlaceListFragment;
 import com.intipharga.fragment.ProfileFragment;
+import com.intipharga.fragment.PromoFragment;
 import com.intipharga.fragment.SettingsFragment;
 import com.intipharga.fragment.TermConditionFragment;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_SETTINGS = 105;
     public static final int FRAGMENT_BUG_REPORT = 106;
     public static final int FRAGMENT_TERM_CONDITION = 107;
+    public static final int FRAGMENT_PROMO = 108;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -90,6 +92,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, BugReportFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_TERM_CONDITION){
                 manager.beginTransaction().replace(R.id.container, TermConditionFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_PROMO){
+                manager.beginTransaction().replace(R.id.container, PromoFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -182,6 +186,12 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_SETTINGS);
                 intent.putExtra(KEY_MENU_ID, 4);
                 intent.putExtra(KEY_TITLE, "Settings");
+                startActivity(intent);
+                break;
+            case R.id.nav_promo:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_PROMO);
+                intent.putExtra(KEY_MENU_ID, 5);
+                intent.putExtra(KEY_TITLE, "Promo");
                 startActivity(intent);
                 break;
             case R.id.nav_collections:
