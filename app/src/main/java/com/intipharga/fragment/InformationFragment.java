@@ -17,6 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gilang.recyclerviewframework.RecyclerAdapter;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.intipharga.activity.R;
 import com.intipharga.model.Photos;
 import com.intipharga.model.Review;
@@ -26,8 +32,9 @@ import org.solovyev.android.views.llm.DividerItemDecoration;
 /**
  * Created by macair on 2/8/16.
  */
-public class InformationFragment extends Fragment {
+public class InformationFragment extends Fragment implements OnMapReadyCallback {
 
+    private static final int REQUEST_CAMERA = 1;
     private AppCompatActivity activity;
     private RecyclerView photosRecycler, reviewRecycler;
     private RecyclerAdapter photosAdapter, reviewAdapter;
@@ -37,7 +44,7 @@ public class InformationFragment extends Fragment {
     private OnStateChangeListener callback;
     private TextView txtMoreReview;
     private ImageView imgToggleReview;
-    private static final int REQUEST_CAMERA = 1;
+    private GoogleMap mMap;
 
     public InformationFragment(){}
 
@@ -57,6 +64,10 @@ public class InformationFragment extends Fragment {
 
         bindViews(v);
         setupViews();
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         return v;
     }
@@ -189,5 +200,15 @@ public class InformationFragment extends Fragment {
             // photo taken
             Bitmap imageBitmap = (Bitmap) extras.get("data");
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

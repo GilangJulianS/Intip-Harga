@@ -213,6 +213,10 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_MENU_ID, 10);
                 startActivity(intent);
                 break;
+//            default:
+//                intent = new Intent(this, MapsActivity.class);
+//                startActivity(intent);
+//                break;
         }
         finish();
         return true;
