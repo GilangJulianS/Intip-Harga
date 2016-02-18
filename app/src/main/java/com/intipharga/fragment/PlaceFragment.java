@@ -1,6 +1,10 @@
 package com.intipharga.fragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -32,8 +38,10 @@ public class PlaceFragment extends Fragment {
     private PlacePagerAdapter adapter;
     private ViewPager viewPager;
     private PagerSlidingTabStrip pagertab;
-    private Button btnAdd;
+    private Button btnAdd, btnCall;
     private AlertDialog dialog;
+    private RatingBar ratingBar;
+    private TextView txtNama, txtReviewCount, txtAddress, txtPhone, txtStatus;
 
     public PlaceFragment(){}
 
@@ -60,6 +68,13 @@ public class PlaceFragment extends Fragment {
         pagertab = (PagerSlidingTabStrip) v.findViewById(R.id.pagertab);
         viewPager = (ViewPager) v.findViewById(R.id.view_pager);
         btnAdd = (Button) v.findViewById(R.id.btn_add);
+        btnCall = (Button) v.findViewById(R.id.btn_call);
+        ratingBar = (RatingBar) v.findViewById(R.id.ratingbar);
+        txtNama = (TextView) v.findViewById(R.id.txt_nama);
+        txtAddress = (TextView) v.findViewById(R.id.txt_alamat);
+        txtReviewCount = (TextView) v.findViewById(R.id.txt_review_counter);
+        txtPhone = (TextView) v.findViewById(R.id.txt_telpon);
+        txtStatus = (TextView) v.findViewById(R.id.txt_status);
     }
 
     public void setupViews(){
@@ -85,12 +100,13 @@ public class PlaceFragment extends Fragment {
                 RecyclerAdapter recyclerAdapter = new RecyclerAdapter(activity);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
 
-                recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12));
-                recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1));
-                recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5));
-                recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12));
-                recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1));
-                recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5));
+                int type = CollectionItem.TYPE_SELECT_TO_ADD;
+                recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
+                recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
+                recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
+                recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
+                recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
+                recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
 
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(recyclerAdapter);
@@ -108,6 +124,20 @@ public class PlaceFragment extends Fragment {
                 dialog.show();
             }
         });
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "+6283824455975"));
+                startActivity(intent);
+            }
+        });
+
+
+        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        stars.getDrawable(0).setColorFilter(ContextCompat.getColor(activity, android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(1).setColorFilter(ContextCompat.getColor(activity, android.R.color.white), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
 
     }
 

@@ -19,13 +19,15 @@ public class Place extends DataModel {
     public float rating;
     public int reviewCounter;
     public String txtAlamat;
+    public boolean deleteable;
 
-    public Place(int imgRes, String txtName, float rating, int reviewCounter, String txtAlamat) {
+    public Place(int imgRes, String txtName, float rating, int reviewCounter, String txtAlamat, boolean deleteable) {
         this.imgRes = imgRes;
         this.txtName = txtName;
         this.rating = rating;
         this.reviewCounter = reviewCounter;
         this.txtAlamat = txtAlamat;
+        this.deleteable = deleteable;
     }
 
     @Override

@@ -22,13 +22,17 @@ import java.util.List;
  */
 public class PlaceListFragment extends RecyclerFragment {
 
+    public static final int MODE_OWN = 100;
+    public static final int MODE_OTHER = 101;
     private AppCompatActivity activity;
+    private int mode;
 
     public PlaceListFragment(){}
 
-    public static PlaceListFragment newInstance(AppCompatActivity activity){
+    public static PlaceListFragment newInstance(AppCompatActivity activity, int mode){
         PlaceListFragment fragment = new PlaceListFragment();
         fragment.activity = activity;
+        fragment.mode = mode;
         return fragment;
     }
 
@@ -66,25 +70,30 @@ public class PlaceListFragment extends RecyclerFragment {
     @Override
     public List<DataModel> getDatas() {
         List<DataModel> datas = new ArrayList<>();
+        boolean deleteable;
+        if(mode == MODE_OWN)
+            deleteable = true;
+        else
+            deleteable = false;
 
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
-        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111"));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
+        datas.add(new Place(R.drawable.tiptop, "Tip Top Restaurant", 4.5f, 78, "Jl. K. L. Yos Sudarso No. 92 A-B, Kota Medan, Sumatera Utara 20111", deleteable));
 
         return datas;
     }

@@ -137,10 +137,11 @@ public class ProfileFragment extends Fragment {
 
     public void addDummyData(){
         items.clear();
-        items.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12));
-        items.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1));
-        items.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5));
-        items.add(new CollectionItem(R.drawable.spa_murah, "Bookmarks", 3));
+        int type = CollectionItem.TYPE_SELECT_TO_DETAIL_OWN;
+        items.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
+        items.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
+        items.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
+        items.add(new CollectionItem(R.drawable.spa_murah, "Bookmarks", 3, type));
 
         recyclerAdapter.add(new Review(R.drawable.tiptop, "Tip Top", 4.5f, false, 1000, 100, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
         recyclerAdapter.add(new Review(R.drawable.tiptop, "Tip Top", 4.5f, false, 1000, 100, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));

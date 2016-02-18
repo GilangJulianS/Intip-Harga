@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     public static final String KEY_FRAGMENT = "fragmentType";
     public static final String KEY_TITLE = "title";
     public static final String KEY_MENU_ID = "menuId";
+    public static final String KEY_MODE = "mode";
     public static final int FRAGMENT_HOME = 100;
     public static final int FRAGMENT_MY_COLLECTION = 101;
     public static final int FRAGMENT_PLACE_LIST = 102;
@@ -81,7 +82,8 @@ public class MainActivity extends AppCompatActivity
             }else if(fragmentType == FRAGMENT_MY_COLLECTION){
                 manager.beginTransaction().replace(R.id.container, MyCollectionsFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_PLACE_LIST){
-                manager.beginTransaction().replace(R.id.container, PlaceListFragment.newInstance(this)).commit();
+                int mode = extras.getInt(KEY_MODE, PlaceListFragment.MODE_OTHER);
+                manager.beginTransaction().replace(R.id.container, PlaceListFragment.newInstance(this, mode)).commit();
             }else if(fragmentType == FRAGMENT_PLACE){
                 manager.beginTransaction().replace(R.id.container, PlaceFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_PROFILE){

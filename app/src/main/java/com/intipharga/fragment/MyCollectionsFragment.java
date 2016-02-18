@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,8 @@ import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.intipharga.activity.R;
 import com.intipharga.model.CollectionItem;
 
+import org.solovyev.android.views.llm.LinearLayoutManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -27,15 +28,15 @@ import java.util.zip.Inflater;
 public class MyCollectionsFragment extends Fragment {
 
     private AppCompatActivity activity;
-    private List<CollectionItem> items;
-    private ViewGroup container;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerAdapter recyclerAdapter;
 
     public MyCollectionsFragment(){}
 
     public static MyCollectionsFragment newInstance(AppCompatActivity activity){
         MyCollectionsFragment fragment = new MyCollectionsFragment();
         fragment.activity = activity;
-        fragment.items = new ArrayList<>();
         return fragment;
     }
 
@@ -50,33 +51,28 @@ public class MyCollectionsFragment extends Fragment {
     }
 
     public void bindViews(View v){
-        container = (ViewGroup) v.findViewById(R.id.collections_container);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
     }
 
     public void setupViews(){
-        addDummyData();
-        container.removeAllViews();
-        LayoutInflater inflater = activity.getLayoutInflater();
-        for(CollectionItem item : items){
-            View v = inflater.inflate(R.layout.card_collection_item, container, false);
-            ImageView img = (ImageView) v.findViewById(R.id.img);
-            TextView txtPrimary = (TextView) v.findViewById(R.id.txt_primary);
-            TextView txtSecondary = (TextView) v.findViewById(R.id.txt_secondary);
+        layoutManager = new LinearLayoutManager(activity);
 
-            img.setImageResource(item.imgRes);
-            txtPrimary.setText(item.txtPrimary);
-            txtSecondary.setText(item.jumlah + " Tempat");
-            container.addView(v);
-        }
+        recyclerAdapter = new RecyclerAdapter(activity);
+        addDummyData();
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
+
     }
 
     public void addDummyData(){
-        items.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12));
-        items.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1));
-        items.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5));
-        items.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12));
-        items.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1));
-        items.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5));
+        int type = CollectionItem.TYPE_SELECT_TO_DETAIL_OWN;
+        recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
+        recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
+        recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
+        recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
+        recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
+        recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
     }
 
     @Override
