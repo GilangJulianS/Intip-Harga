@@ -380,6 +380,7 @@
                 android:gravity="center_horizontal">
 
                 <ImageButton
+                    android:id="@+id/btn_write_review"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="90dp"
@@ -390,6 +391,7 @@
                     android:background="@android:color/transparent"/>
 
                 <ImageButton
+                    android:id="@+id/btn_add_photo"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="90dp"
@@ -400,6 +402,7 @@
                     android:background="@android:color/transparent"/>
 
                 <ImageButton
+                    android:id="@+id/btn_check_in"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="90dp"

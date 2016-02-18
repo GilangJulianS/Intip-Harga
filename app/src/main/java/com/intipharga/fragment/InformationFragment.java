@@ -1,6 +1,9 @@
 package com.intipharga.fragment;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.intipharga.activity.R;
@@ -28,11 +32,12 @@ public class InformationFragment extends Fragment {
     private RecyclerView photosRecycler, reviewRecycler;
     private RecyclerAdapter photosAdapter, reviewAdapter;
     private RecyclerView.LayoutManager photosManager, reviewManager;
-    private ImageButton btnToggleDetail;
+    private ImageButton btnToggleDetail, btnAddPhoto, btnWriteReview, btnCheckIn;
     private ViewGroup containerInformation, groupToggleReview, groupToggleDetail;
     private OnStateChangeListener callback;
     private TextView txtMoreReview;
     private ImageView imgToggleReview;
+    private static final int REQUEST_CAMERA = 1;
 
     public InformationFragment(){}
 
@@ -65,6 +70,9 @@ public class InformationFragment extends Fragment {
         groupToggleDetail = (ViewGroup) v.findViewById(R.id.group_toggle_detail);
         txtMoreReview = (TextView) v.findViewById(R.id.txt_more_reviews);
         imgToggleReview = (ImageView) v.findViewById(R.id.btn_toggle_reviews);
+        btnAddPhoto = (ImageButton) v.findViewById(R.id.btn_add_photo);
+        btnWriteReview = (ImageButton) v.findViewById(R.id.btn_write_review);
+        btnCheckIn = (ImageButton) v.findViewById(R.id.btn_check_in);
     }
 
     public void setupViews(){
@@ -122,6 +130,30 @@ public class InformationFragment extends Fragment {
                 }
             }
         });
+
+        btnAddPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(intent.resolveActivity(activity.getPackageManager()) != null){
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                }
+            }
+        });
+
+        btnWriteReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "Write Review clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "Check in clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void addDummyData(){
@@ -148,5 +180,14 @@ public class InformationFragment extends Fragment {
 
         public abstract void onStateChange();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CAMERA && resultCode == activity.RESULT_OK){
+            Bundle extras = data.getExtras();
+            // photo taken
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+        }
     }
 }
