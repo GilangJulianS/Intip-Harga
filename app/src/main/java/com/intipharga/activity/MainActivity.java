@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.intipharga.fragment.BugReportFragment;
 import com.intipharga.fragment.FriendListFragment;
 import com.intipharga.fragment.HomeFragment;
+import com.intipharga.fragment.MessageThreadFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
 import com.intipharga.fragment.PlaceListFragment;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_TERM_CONDITION = 107;
     public static final int FRAGMENT_PROMO = 108;
     public static final int FRAGMENT_FRIENDS = 109;
+    public static final int FRAGMENT_MESSAGE_THREAD = 110;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, PromoFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_FRIENDS){
                 manager.beginTransaction().replace(R.id.container, FriendListFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_MESSAGE_THREAD){
+                manager.beginTransaction().replace(R.id.container, MessageThreadFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -186,6 +190,12 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_PROFILE);
                 intent.putExtra(KEY_MENU_ID, 1);
                 intent.putExtra(KEY_TITLE, "My Profile");
+                startActivity(intent);
+                break;
+            case R.id.nav_message:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_MESSAGE_THREAD);
+                intent.putExtra(KEY_MENU_ID, 2);
+                intent.putExtra(KEY_TITLE, "Messages");
                 startActivity(intent);
                 break;
             case R.id.nav_friends:
