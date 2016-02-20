@@ -3,6 +3,7 @@ package com.intipharga.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,7 +63,7 @@ public class MyCollectionsFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerAdapter);
-
+        recyclerView.setNestedScrollingEnabled(false);
     }
 
     public void addDummyData(){

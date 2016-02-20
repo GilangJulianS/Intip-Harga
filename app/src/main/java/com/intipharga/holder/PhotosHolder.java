@@ -1,8 +1,11 @@
 package com.intipharga.holder;
 
 import android.app.Activity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gilang.recyclerviewframework.DataModel;
@@ -27,5 +30,11 @@ public class PhotosHolder extends RecyclerHolder {
     public void bind(DataModel dataModel, Activity activity, int position) {
         Photos p = (Photos) dataModel;
         img.setImageResource(p.imgRes);
+        if(p.dimension != -1){
+            ViewGroup.LayoutParams params = img.getLayoutParams();
+            params.height = p.dimension;
+            params.width = p.dimension;
+            img.setLayoutParams(params);
+        }
     }
 }

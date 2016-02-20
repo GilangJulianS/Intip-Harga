@@ -42,10 +42,8 @@ public class CollectionItemHolder extends RecyclerHolder {
         img.setImageResource(item.imgRes);
         txtPrimary.setText(item.txtPrimary);
         txtSecondary.setText(item.jumlah + " Tempat");
-        System.out.println(item.type);
         final Activity temp = activity;
         if(item.type == CollectionItem.TYPE_SELECT_TO_ADD){
-            System.out.println("dialog listener");
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -65,7 +63,6 @@ public class CollectionItemHolder extends RecyclerHolder {
                 }
             });
         }else if(item.type == CollectionItem.TYPE_SELECT_TO_DETAIL_OTHER){
-            System.out.println("other listener");
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,7 +72,6 @@ public class CollectionItemHolder extends RecyclerHolder {
                 }
             });
         }else if(item.type == CollectionItem.TYPE_SELECT_TO_DETAIL_OWN){
-            System.out.println("own listener");
             card.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

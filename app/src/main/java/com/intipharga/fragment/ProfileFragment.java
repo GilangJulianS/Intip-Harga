@@ -84,6 +84,7 @@ public class ProfileFragment extends Fragment {
         recyclerReview.setLayoutManager(layoutManager);
         recyclerReview.addItemDecoration(new DividerItemDecoration(activity, null));
         recyclerReview.setAdapter(recyclerAdapter);
+        recyclerReview.setNestedScrollingEnabled(false);
         
         LayoutInflater inflater = activity.getLayoutInflater();
         for(CollectionItem item : items){

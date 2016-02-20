@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.intipharga.fragment.BugReportFragment;
+import com.intipharga.fragment.FeedFragment;
 import com.intipharga.fragment.FriendListFragment;
 import com.intipharga.fragment.HomeFragment;
 import com.intipharga.fragment.MessageFragment;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_FRIENDS = 109;
     public static final int FRAGMENT_MESSAGE_THREAD = 110;
     public static final int FRAGMENT_MESSAGE = 111;
+    public static final int FRAGMENT_TIMELINE = 112;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, MessageThreadFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_MESSAGE){
                 manager.beginTransaction().replace(R.id.container, MessageFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_TIMELINE){
+                manager.beginTransaction().replace(R.id.container, FeedFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -208,33 +212,39 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_TITLE, "My Friends");
                 startActivity(intent);
                 break;
+            case R.id.nav_timeline:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_TIMELINE);
+                intent.putExtra(KEY_MENU_ID, 4);
+                intent.putExtra(KEY_TITLE, "Timeline");
+                startActivity(intent);
+                break;
             case R.id.nav_settings:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_SETTINGS);
-                intent.putExtra(KEY_MENU_ID, 4);
+                intent.putExtra(KEY_MENU_ID, 5);
                 intent.putExtra(KEY_TITLE, "Settings");
                 startActivity(intent);
                 break;
             case R.id.nav_promo:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_PROMO);
-                intent.putExtra(KEY_MENU_ID, 5);
+                intent.putExtra(KEY_MENU_ID, 6);
                 intent.putExtra(KEY_TITLE, "Promo");
                 startActivity(intent);
                 break;
             case R.id.nav_collections:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_MY_COLLECTION);
-                intent.putExtra(KEY_MENU_ID, 6);
+                intent.putExtra(KEY_MENU_ID, 7);
                 intent.putExtra(KEY_TITLE, "My Collections");
                 startActivity(intent);
                 break;
             case R.id.nav_report_bug:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_BUG_REPORT);
-                intent.putExtra(KEY_MENU_ID, 9);
+                intent.putExtra(KEY_MENU_ID, 10);
                 intent.putExtra(KEY_TITLE, "Report Bug");
                 startActivity(intent);
                 break;
             case R.id.nav_terms_conditions:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_TERM_CONDITION);
-                intent.putExtra(KEY_MENU_ID, 10);
+                intent.putExtra(KEY_MENU_ID, 11);
                 startActivity(intent);
                 break;
             default:

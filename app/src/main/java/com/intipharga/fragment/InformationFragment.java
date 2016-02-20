@@ -99,6 +99,7 @@ public class InformationFragment extends Fragment implements OnMapReadyCallback 
         reviewRecycler.setLayoutManager(reviewManager);
         reviewRecycler.addItemDecoration(new DividerItemDecoration(activity, null));
         reviewRecycler.setAdapter(reviewAdapter);
+        reviewRecycler.setNestedScrollingEnabled(false);
 
         groupToggleDetail.setOnClickListener(new View.OnClickListener() {
             private boolean isExpanded = false;

@@ -18,8 +18,11 @@ import com.intipharga.activity.R;
 import com.intipharga.custom.HomePagerAdapter;
 import com.intipharga.model.CollectionItem;
 import com.intipharga.model.HomePagerItem;
+import com.intipharga.model.Promo;
+import com.intipharga.model.Review;
 import com.viewpagerindicator.CirclePageIndicator;
 
+import org.solovyev.android.views.llm.DividerItemDecoration;
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
 /**
@@ -76,6 +79,8 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setNestedScrollingEnabled(false);
+
 
         setupViewPager();
 

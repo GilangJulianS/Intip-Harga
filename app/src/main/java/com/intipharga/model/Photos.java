@@ -15,9 +15,16 @@ import com.intipharga.holder.PhotosHolder;
 public class Photos extends DataModel {
 
     public int imgRes;
+    public int dimension;
 
     public Photos(int imgRes){
         this.imgRes = imgRes;
+        dimension = -1;
+    }
+
+    public Photos(int imgRes, int dimension){
+        this.imgRes = imgRes;
+        this.dimension = dimension;
     }
 
     @Override
