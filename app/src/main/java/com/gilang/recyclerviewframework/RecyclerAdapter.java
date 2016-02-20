@@ -36,6 +36,12 @@ public class RecyclerAdapter extends Adapter<RecyclerHolder>{
         datas.addAll(dataModels);
     }
 
+    public void remove(DataModel dataModel){ datas.remove(dataModel); }
+
+    public void remove(int position){ datas.remove(position); }
+
+    public void clearAll(){ datas.clear(); }
+
     @Override
     public RecyclerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.intipharga.fragment.BugReportFragment;
+import com.intipharga.fragment.FriendListFragment;
 import com.intipharga.fragment.HomeFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_BUG_REPORT = 106;
     public static final int FRAGMENT_TERM_CONDITION = 107;
     public static final int FRAGMENT_PROMO = 108;
+    public static final int FRAGMENT_FRIENDS = 109;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -96,6 +98,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, TermConditionFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_PROMO){
                 manager.beginTransaction().replace(R.id.container, PromoFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_FRIENDS){
+                manager.beginTransaction().replace(R.id.container, FriendListFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
@@ -184,6 +188,12 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_TITLE, "My Profile");
                 startActivity(intent);
                 break;
+            case R.id.nav_friends:
+                intent.putExtra(KEY_FRAGMENT, FRAGMENT_FRIENDS);
+                intent.putExtra(KEY_MENU_ID, 3);
+                intent.putExtra(KEY_TITLE, "My Friends");
+                startActivity(intent);
+                break;
             case R.id.nav_settings:
                 intent.putExtra(KEY_FRAGMENT, FRAGMENT_SETTINGS);
                 intent.putExtra(KEY_MENU_ID, 4);
@@ -213,10 +223,10 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(KEY_MENU_ID, 10);
                 startActivity(intent);
                 break;
-//            default:
-//                intent = new Intent(this, MapsActivity.class);
-//                startActivity(intent);
-//                break;
+            default:
+                intent = new Intent(this, MapsActivity.class);
+                startActivity(intent);
+                break;
         }
         finish();
         return true;

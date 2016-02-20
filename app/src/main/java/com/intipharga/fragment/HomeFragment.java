@@ -1,7 +1,6 @@
 package com.intipharga.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,8 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ScrollView;
 
 import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.intipharga.activity.MainActivity;
@@ -24,9 +22,6 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by macair on 2/6/16.
  */
@@ -36,6 +31,7 @@ public class HomeFragment extends Fragment {
     private ViewPager pager;
     private HomePagerAdapter pagerAdapter;
     private CirclePageIndicator indicator;
+    private ScrollView scrollView;
     private Button btnQuickSearch1, btnQuickSearch2, btnQuickSearch3, btnQuickSearch4;
     private Button btnBrowseAll;
     private RecyclerAdapter recyclerAdapter;
@@ -69,9 +65,18 @@ public class HomeFragment extends Fragment {
         btnQuickSearch4 = (Button) v.findViewById(R.id.btn_quick_search_4);
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         btnBrowseAll = (Button) v.findViewById(R.id.btn_browse_all);
+        scrollView = (ScrollView) v.findViewById(R.id.scroll_view);
     }
 
     public void setupView(View v){
+        layoutManager = new LinearLayoutManager(activity, android.support.v7.widget.LinearLayoutManager.VERTICAL, false);
+
+        recyclerAdapter = new RecyclerAdapter(activity);
+        addDummyData();
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
+
         setupViewPager();
 
         btnQuickSearch1.setOnClickListener(new View.OnClickListener() {
@@ -109,13 +114,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        layoutManager = new LinearLayoutManager(activity);
 
-        recyclerAdapter = new RecyclerAdapter(activity);
-        addDummyData();
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(recyclerAdapter);
     }
 
     public void setupViewPager(){
