@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.intipharga.fragment.BugReportFragment;
 import com.intipharga.fragment.FriendListFragment;
 import com.intipharga.fragment.HomeFragment;
+import com.intipharga.fragment.MessageFragment;
 import com.intipharga.fragment.MessageThreadFragment;
 import com.intipharga.fragment.MyCollectionsFragment;
 import com.intipharga.fragment.PlaceFragment;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     public static final int FRAGMENT_PROMO = 108;
     public static final int FRAGMENT_FRIENDS = 109;
     public static final int FRAGMENT_MESSAGE_THREAD = 110;
+    public static final int FRAGMENT_MESSAGE = 111;
     private ActionBarDrawerToggle toggle;
     private boolean isParentView;
     private String title;
@@ -104,6 +106,8 @@ public class MainActivity extends AppCompatActivity
                 manager.beginTransaction().replace(R.id.container, FriendListFragment.newInstance(this)).commit();
             }else if(fragmentType == FRAGMENT_MESSAGE_THREAD){
                 manager.beginTransaction().replace(R.id.container, MessageThreadFragment.newInstance(this)).commit();
+            }else if(fragmentType == FRAGMENT_MESSAGE){
+                manager.beginTransaction().replace(R.id.container, MessageFragment.newInstance(this)).commit();
             }
         }else {
             getSupportActionBar().setTitle("Intip Harga");
