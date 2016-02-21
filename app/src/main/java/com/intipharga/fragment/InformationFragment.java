@@ -39,11 +39,11 @@ public class InformationFragment extends Fragment implements OnMapReadyCallback 
     private RecyclerView photosRecycler, reviewRecycler;
     private RecyclerAdapter photosAdapter, reviewAdapter;
     private RecyclerView.LayoutManager photosManager, reviewManager;
-    private ImageButton btnToggleDetail, btnAddPhoto, btnWriteReview, btnCheckIn;
+    private ImageButton btnAddPhoto, btnWriteReview, btnCheckIn;
     private ViewGroup containerInformation, groupToggleReview, groupToggleDetail;
     private OnStateChangeListener callback;
     private TextView txtMoreReview;
-    private ImageView imgToggleReview;
+    private ImageView imgToggleReview, imgToggleDetail;
     private GoogleMap mMap;
 
     public InformationFragment(){}
@@ -75,7 +75,7 @@ public class InformationFragment extends Fragment implements OnMapReadyCallback 
     public void bindViews(View v){
         photosRecycler = (RecyclerView) v.findViewById(R.id.recycler_photos);
         reviewRecycler = (RecyclerView) v.findViewById(R.id.recycler_reviews);
-        btnToggleDetail = (ImageButton) v.findViewById(R.id.btn_toggle_detail);
+        imgToggleDetail = (ImageView) v.findViewById(R.id.btn_toggle_detail);
         containerInformation = (ViewGroup) v.findViewById(R.id.container_information);
         groupToggleReview = (ViewGroup) v.findViewById(R.id.group_toggle_review);
         groupToggleDetail = (ViewGroup) v.findViewById(R.id.group_toggle_detail);
@@ -111,11 +111,11 @@ public class InformationFragment extends Fragment implements OnMapReadyCallback 
                 }
                 if (!isExpanded) {
                     containerInformation.setVisibility(View.VISIBLE);
-                    btnToggleDetail.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                    imgToggleDetail.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
                     isExpanded = true;
                 } else {
                     containerInformation.setVisibility(View.GONE);
-                    btnToggleDetail.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                    imgToggleDetail.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
                     isExpanded = false;
                 }
             }
