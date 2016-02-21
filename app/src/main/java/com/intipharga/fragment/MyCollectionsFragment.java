@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.intipharga.activity.R;
 import com.intipharga.model.CollectionItem;
 
-import org.solovyev.android.views.llm.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,7 @@ public class MyCollectionsFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerAdapter recyclerAdapter;
+    private Button btnMakeNew;
 
     public MyCollectionsFragment(){}
 
@@ -45,14 +48,23 @@ public class MyCollectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_my_collections, parent, false);
 
+        RecyclerViewHeader header = RecyclerViewHeader.fromXml(activity, R.layout.header_my_collection);
+
+        bindHeader(header);
         bindViews(v);
         setupViews();
+
+        header.attachTo(recyclerView);
 
         return v;
     }
 
     public void bindViews(View v){
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+    }
+
+    public void bindHeader(View header){
+        btnMakeNew = (Button) header.findViewById(R.id.btn_make_new);
     }
 
     public void setupViews(){
@@ -64,7 +76,16 @@ public class MyCollectionsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setNestedScrollingEnabled(false);
+
+        btnMakeNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "Make New Button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 
     public void addDummyData(){
         int type = CollectionItem.TYPE_SELECT_TO_DETAIL_OWN;

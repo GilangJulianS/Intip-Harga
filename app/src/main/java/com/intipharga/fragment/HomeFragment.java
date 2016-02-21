@@ -1,6 +1,7 @@
 package com.intipharga.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.gilang.recyclerviewframework.RecyclerAdapter;
 import com.intipharga.activity.MainActivity;
@@ -25,6 +28,9 @@ import com.viewpagerindicator.CirclePageIndicator;
 import org.solovyev.android.views.llm.DividerItemDecoration;
 import org.solovyev.android.views.llm.LinearLayoutManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by macair on 2/6/16.
  */
@@ -37,15 +43,15 @@ public class HomeFragment extends Fragment {
     private ScrollView scrollView;
     private Button btnQuickSearch1, btnQuickSearch2, btnQuickSearch3, btnQuickSearch4;
     private Button btnBrowseAll;
-    private RecyclerAdapter recyclerAdapter;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
+    private ViewGroup collectionsContainer;
+    private List<CollectionItem> datas;
 
     public HomeFragment(){}
 
     public static HomeFragment newInstance(AppCompatActivity activity){
         HomeFragment fragment = new HomeFragment();
         fragment.activity = activity;
+        fragment.datas = new ArrayList<>();
         return fragment;
     }
 
@@ -54,7 +60,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
         bindView(v);
-        setupView(v);
+        setupView();
 
         return v;
     }
@@ -66,20 +72,37 @@ public class HomeFragment extends Fragment {
         btnQuickSearch2 = (Button) v.findViewById(R.id.btn_quick_search_2);
         btnQuickSearch3 = (Button) v.findViewById(R.id.btn_quick_search_3);
         btnQuickSearch4 = (Button) v.findViewById(R.id.btn_quick_search_4);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+        collectionsContainer = (ViewGroup) v.findViewById(R.id.collections_container);
         btnBrowseAll = (Button) v.findViewById(R.id.btn_browse_all);
         scrollView = (ScrollView) v.findViewById(R.id.scroll_view);
     }
 
-    public void setupView(View v){
-        layoutManager = new LinearLayoutManager(activity, android.support.v7.widget.LinearLayoutManager.VERTICAL, false);
-
-        recyclerAdapter = new RecyclerAdapter(activity);
+    public void setupView(){
         addDummyData();
+        LayoutInflater inflater = activity.getLayoutInflater();
+        for(CollectionItem item : datas){
+            final CollectionItem temp = item;
+            View v = inflater.inflate(R.layout.card_collection_item, collectionsContainer, false);
+            ImageView img = (ImageView) v.findViewById(R.id.img);
+            final TextView txtPrimary = (TextView) v.findViewById(R.id.txt_primary);
+            TextView txtSecondary = (TextView) v.findViewById(R.id.txt_secondary);
+            ViewGroup card = (ViewGroup) v.findViewById(R.id.card_view);
 
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setNestedScrollingEnabled(false);
+            img.setImageResource(item.imgRes);
+            txtPrimary.setText(item.txtPrimary);
+            txtSecondary.setText(item.jumlah + " Tempat");
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = MainActivity.newIntent(activity, txtPrimary.getText().toString(), MainActivity.FRAGMENT_PLACE_LIST);
+                    i.putExtra(MainActivity.KEY_MODE, PlaceListFragment.MODE_OWN);
+                    activity.startActivity(i);
+                }
+            });
+
+            collectionsContainer.addView(v);
+        }
 
 
         setupViewPager();
@@ -143,9 +166,9 @@ public class HomeFragment extends Fragment {
     public void addDummyData(){
         // dummy
         int type = CollectionItem.TYPE_SELECT_TO_DETAIL_OWN;
-        recyclerAdapter.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
-        recyclerAdapter.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
-        recyclerAdapter.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
+        datas.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
+        datas.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
+        datas.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
     }
 
     @Override
