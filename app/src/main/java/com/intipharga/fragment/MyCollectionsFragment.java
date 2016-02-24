@@ -100,6 +100,7 @@ public class MyCollectionsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (AppCompatActivity)context;
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }

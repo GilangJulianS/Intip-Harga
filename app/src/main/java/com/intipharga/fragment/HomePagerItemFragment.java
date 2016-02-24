@@ -1,5 +1,6 @@
 package com.intipharga.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -41,14 +42,30 @@ public class HomePagerItemFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle b){
         View v = inflater.inflate(R.layout.pager_home_item_1, parent, false);
 
         bindView(v);
+
+//        if(b != null){
+//            item = new HomePagerItem(b.getString("imgUrl"), b.getString("destUrl"), b.getString("primary"), b.getString("secondary"), b.getString("button"));
+//        }
+
         update();
 
         return v;
     }
+
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        outState.putString("primary", item.txtPrimary);
+//        outState.putString("secondary", item.txtSecondary);
+//        outState.putString("button", item.txtButton);
+//        outState.putString("destUrl", item.destUrl);
+//        outState.putString("imgUrl", item.imgUrl);
+//
+//        super.onSaveInstanceState(outState);
+//    }
 
     public void bindView(View v){
         txtPrimary = (TextView) v.findViewById(R.id.txt_primary);
@@ -62,5 +79,12 @@ public class HomePagerItemFragment extends Fragment {
         txtSecondary.setText(item.txtSecondary);
         btn.setText(item.txtButton);
         img.setImageResource(R.drawable.kursus_masak);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }

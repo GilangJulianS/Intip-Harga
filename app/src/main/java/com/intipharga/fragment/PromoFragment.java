@@ -1,5 +1,6 @@
 package com.intipharga.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -69,5 +70,12 @@ public class PromoFragment extends RecyclerFragment {
         datas.add(new Promo(R.drawable.zengarden, "Sowe Restaurant & Lounge", R.drawable.steak, "Dapatkan discount up to 40% untuk menu-menu tertentu di Sowe Resto & Lounge\n\nSowe Resto & Lounge menyediakan live band akustik di Jumat & Sabtu dari jam 8 sampai selesai dan free karaoke setiap hari kamis mulai jam 9."));
 
         return datas;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }

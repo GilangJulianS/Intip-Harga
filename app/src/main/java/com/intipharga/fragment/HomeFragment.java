@@ -1,5 +1,6 @@
 package com.intipharga.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -166,6 +167,10 @@ public class HomeFragment extends Fragment {
     public void addDummyData(){
         // dummy
         int type = CollectionItem.TYPE_SELECT_TO_DETAIL_OWN;
+        if(datas == null)
+            datas = new ArrayList<>();
+        else
+            datas.clear();
         datas.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
         datas.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
         datas.add(new CollectionItem(R.drawable.spa_murah, "Spa Murah", 5, type));
@@ -174,6 +179,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (AppCompatActivity) context;
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }

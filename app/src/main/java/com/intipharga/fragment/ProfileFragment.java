@@ -1,5 +1,6 @@
 package com.intipharga.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -137,7 +138,10 @@ public class ProfileFragment extends Fragment {
     }
 
     public void addDummyData(){
-        items.clear();
+        if(items == null)
+            items = new ArrayList<>();
+        else
+            items.clear();
         int type = CollectionItem.TYPE_SELECT_TO_DETAIL_OWN;
         items.add(new CollectionItem(R.drawable.tempat_nongkrong, "Tempat Nongkrong Favorit", 12, type));
         items.add(new CollectionItem(R.drawable.klinik_gigi, "Klinik Gigi", 1, type));
@@ -150,5 +154,12 @@ public class ProfileFragment extends Fragment {
         recyclerAdapter.add(new Review(R.drawable.tiptop, "Tip Top", 4.5f, false, 1000, 100, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
         recyclerAdapter.add(new Review(R.drawable.tiptop, "Tip Top", 4.5f, false, 1000, 100, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
         recyclerAdapter.add(new Review(R.drawable.tiptop, "Tip Top", 4.5f, false, 1000, 100, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"));
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }

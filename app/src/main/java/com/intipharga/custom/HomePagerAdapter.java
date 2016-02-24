@@ -17,40 +17,30 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 
     private AppCompatActivity activity;
     private List<HomePagerItem> datas;
-    private List<HomePagerItemFragment> fragments;
 
     public HomePagerAdapter(AppCompatActivity activity){
         super(activity.getSupportFragmentManager());
         this.activity = activity;
         datas = new ArrayList<>();
-        fragments = new ArrayList<>();
     }
 
     public void add(HomePagerItem item){
         datas.add(item);
-        HomePagerItemFragment fragment = HomePagerItemFragment.newInstance(activity, item);
-        fragments.add(fragment);
     }
 
     public void remove(HomePagerItem item){
-        int idx = datas.indexOf(item);
         datas.remove(item);
-        fragments.remove(idx);
-    }
-
-    public void reset(){
-        datas.clear();
-        fragments.clear();
     }
 
     @Override
     public Fragment getItem(int position) {
-        return fragments.get(position);
+        System.out.println("Created new fragment at position " + position);
+        return HomePagerItemFragment.newInstance(activity, datas.get(position));
     }
 
     @Override
     public int getCount() {
-        return fragments.size();
+        return datas.size();
     }
 
 

@@ -1,5 +1,6 @@
 package com.intipharga.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -86,5 +87,12 @@ public class BugReportFragment extends Fragment {
         txtInfo.setText(ss);
         txtInfo.setMovementMethod(LinkMovementMethod.getInstance());
         txtInfo.setHighlightColor(Color.TRANSPARENT);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }

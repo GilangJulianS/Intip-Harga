@@ -44,6 +44,7 @@ public class MessageThreadFragment extends RecyclerFragment {
             }
         });
 
+        fabContainer.removeAllViews();
         fabContainer.addView(fab);
     }
 

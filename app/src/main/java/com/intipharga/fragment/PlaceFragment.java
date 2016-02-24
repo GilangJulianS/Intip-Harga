@@ -1,6 +1,7 @@
 package com.intipharga.fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -155,4 +156,10 @@ public class PlaceFragment extends Fragment {
         return TYPE_RESTAURANT;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
+    }
 }

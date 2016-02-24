@@ -1,5 +1,6 @@
 package com.intipharga.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -65,5 +66,12 @@ public class MessageFragment extends Fragment{
         recyclerAdapter.add(new Message(R.drawable.user, R.drawable.tiptop, "Destra sent you a gift", null, Message.SIDE_LEFT));
         recyclerAdapter.add(new Message(R.drawable.user, -1, null, "Pik! Happy birthday!", Message.SIDE_LEFT));
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof AppCompatActivity)
+            activity = (AppCompatActivity) context;
     }
 }
